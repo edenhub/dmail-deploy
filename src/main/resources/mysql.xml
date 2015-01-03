@@ -1,0 +1,46 @@
+<db-sql>
+    <table>
+        <table-name>user4proxy</table-name>
+        <table-sql>
+            DROP TABLE IF EXISTS `user4proxy`;
+            CREATE TABLE `user4proxy` (
+            `id` int(11) NOT NULL AUTO_INCREMENT,
+            `username` varchar(255) NOT NULL,
+            `pwdHash` varchar(255) DEFAULT NULL,
+            PRIMARY KEY (`id`,`username`),
+            KEY `id` (`id`)
+            ) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8;
+        </table-sql>
+    </table>
+    <table>
+        <table-name>contracts</table-name>
+        <table-sql>
+            DROP TABLE IF EXISTS `contracts`;
+            CREATE TABLE `contracts` (
+            `id` int(11) NOT NULL AUTO_INCREMENT,
+            `mail` varchar(255) NOT NULL,
+            `alias` varchar(255) DEFAULT NULL,
+            `content` varchar(255) DEFAULT NULL,
+            `tofriend` int(11) DEFAULT NULL,
+            PRIMARY KEY (`id`,`mail`),
+            KEY `fk_tofriend` (`tofriend`),
+            CONSTRAINT `fk_tofriend` FOREIGN KEY (`tofriend`) REFERENCES `user4proxy` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+            ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+        </table-sql>
+    </table>
+    <table>
+        <table-name>operatelog</table-name>
+        <table-sql>
+            DROP TABLE IF EXISTS `operatelog`;
+            CREATE TABLE `operatelog` (
+            `id` int(11) NOT NULL AUTO_INCREMENT,
+            `datetime` datetime NOT NULL,
+            `initiator` varchar(255) NOT NULL,
+            `f_describe` varchar(255) DEFAULT NULL,
+            `f_level` tinyint(4) NOT NULL,
+            `result` tinyint(4) DEFAULT NULL,
+            PRIMARY KEY (`id`)
+            ) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=utf8;
+        </table-sql>
+    </table>
+</db-sql>

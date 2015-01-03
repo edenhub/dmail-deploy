@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<deploy>
+    <deploy-db>
+        <sql-file>./mysql.xml</sql-file>
+        <db-name>mail</db-name>
+        <!--jdbc:mysql://localhost/easyform?user=root&password=12345-->
+        <db-url>jdbc:mysql://localhost/mail</db-url>
+        <db-user>root</db-user>
+        <db-password>12345</db-password>
+    </deploy-db>
+    <deploy-mail-server>
+        <mail-server-src>./james2</mail-server-src>
+        <mail-server-dest>d:\\OOP\\mail-server\\</mail-server-dest>
+    </deploy-mail-server>
+    <deploy-app-server>
+        <app-server-src>./tomcat7</app-server-src>
+        <app-server-dest>d:\\OOP\\app-server</app-server-dest>
+    </deploy-app-server>
+    <deploy-app>
+        <app-src>./dmail4j</app-src>
+        <app-index>localhost:8080/ymail</app-index>
+    </deploy-app>
+</deploy>
