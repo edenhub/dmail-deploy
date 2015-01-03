@@ -1,6 +1,6 @@
 package conf.subconf;
 
-import conf.IDeploy;
+import conf.IDeployConf;
 import org.apache.log4j.Logger;
 import org.dom4j.Document;
 import org.dom4j.DocumentException;
@@ -14,11 +14,11 @@ import java.io.InputStream;
 /**
  * Created by lab on 2015/1/3.
  */
-public class DeployAppServer implements IDeploy {
+public class DeployConfAppServer implements IDeployConf {
     private String appServerSrc;
     private String appServerDest;
 
-    private Logger logger = Logger.getLogger(DeployAppServer.class);
+    private Logger logger = Logger.getLogger(DeployConfAppServer.class);
 
     public String getAppServerSrc() {
         return appServerSrc;

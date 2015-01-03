@@ -1,6 +1,6 @@
 package conf.subconf;
 
-import conf.IDeploy;
+import conf.IDeployConf;
 import org.apache.log4j.Logger;
 import org.dom4j.Document;
 import org.dom4j.DocumentException;
@@ -16,15 +16,15 @@ import java.util.List;
 /**
  * Created by lab on 2015/1/3.
  */
-public class DeployDBSQL implements IDeploy {
+public class DeployConfDBSQL implements IDeployConf {
     private List<TablePair> tablePairs;
-    private static Logger logger = Logger.getLogger(DeployDBSQL.class);
+    private static Logger logger = Logger.getLogger(DeployConfDBSQL.class);
 
-    public DeployDBSQL(){
+    public DeployConfDBSQL(){
         tablePairs = new ArrayList<TablePair>();
     }
 
-    public DeployDBSQL(int capabilty){
+    public DeployConfDBSQL(int capabilty){
         tablePairs = new ArrayList<TablePair>(capabilty);
     }
 

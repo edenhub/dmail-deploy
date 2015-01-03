@@ -1,6 +1,6 @@
 package conf.subconf;
 
-import conf.IDeploy;
+import conf.IDeployConf;
 import org.apache.log4j.Logger;
 import org.dom4j.Document;
 import org.dom4j.DocumentException;
@@ -14,11 +14,11 @@ import java.io.InputStream;
 /**
  * Created by lab on 2015/1/3.
  */
-public class DeployMailServer implements IDeploy {
+public class DeployConfMailServer implements IDeployConf {
     private String mailServerSrc;
     private String mailServerDest;
 
-    private static Logger logger = Logger.getLogger(DeployMailServer.class);
+    private static Logger logger = Logger.getLogger(DeployConfMailServer.class);
     public String getMailServerSrc() {
         return mailServerSrc;
     }

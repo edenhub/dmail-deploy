@@ -1,7 +1,7 @@
 package conf.subconf;
 
 
-import conf.IDeploy;
+import conf.IDeployConf;
 import org.apache.log4j.Logger;
 import org.dom4j.Document;
 import org.dom4j.DocumentException;
@@ -16,19 +16,19 @@ import java.io.InputStream;
 /**
  * Created by lab on 2015/1/3.
  */
-public class DeployDB implements IDeploy {
-    private DeployDBSQL deployDBSQL;
+public class DeployConfDB implements IDeployConf {
+    private DeployConfDBSQL deployDBSQL;
     private String dbName;
     private String dbUrl;
     private String dbUser;
     private String dbPassword;
-    private static Logger logger = Logger.getLogger(DeployDB.class);
+    private static Logger logger = Logger.getLogger(DeployConfDB.class);
 
-    public DeployDBSQL getDeployDBSQL() {
+    public DeployConfDBSQL getDeployDBSQL() {
         return deployDBSQL;
     }
 
-    public void setDeployDBSQL(DeployDBSQL deployDBSQL) {
+    public void setDeployDBSQL(DeployConfDBSQL deployDBSQL) {
         this.deployDBSQL = deployDBSQL;
     }
 
@@ -106,7 +106,7 @@ public class DeployDB implements IDeploy {
         Node sqlFile = node.selectSingleNode("sql-file");
         String path = sqlFile.getText();
         InputStream in = null;
-        deployDBSQL = new DeployDBSQL();
+        deployDBSQL = new DeployConfDBSQL();
         if (path.startsWith("./")){
             in = Version.class.getResourceAsStream(path.substring(path.indexOf("/")));
             deployDBSQL.initInstance(in);

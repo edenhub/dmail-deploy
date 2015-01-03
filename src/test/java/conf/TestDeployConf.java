@@ -12,7 +12,7 @@ public class TestDeployConf {
     @Test
     public void test01(){
         InputStream in = Version.class.getResourceAsStream("/deploy_all.xml");
-        DeployConf deployConf = new DeployConf();
+        DeployConfConf deployConf = new DeployConfConf();
         deployConf.initInstance(in);
 
         System.out.println(deployConf);

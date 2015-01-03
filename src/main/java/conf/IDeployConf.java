@@ -7,7 +7,7 @@ import java.io.InputStream;
 /**
  * Created by lab on 2015/1/3.
  */
-public interface IDeploy {
+public interface IDeployConf {
     public void initInstance(String path);
 
     public void initInstance(InputStream inputStream);

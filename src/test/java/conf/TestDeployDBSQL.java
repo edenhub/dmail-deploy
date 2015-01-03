@@ -1,6 +1,6 @@
 package conf;
 
-import conf.subconf.DeployDBSQL;
+import conf.subconf.DeployConfDBSQL;
 import org.junit.Before;
 import org.junit.Test;
 import utils.Version;
@@ -20,7 +20,7 @@ public class TestDeployDBSQL {
 
     @Test
     public void test01(){
-        DeployDBSQL deployDBSQL = new DeployDBSQL();
+        DeployConfDBSQL deployDBSQL = new DeployConfDBSQL();
         deployDBSQL.initInstance(in);
         System.out.println(deployDBSQL);
     }

@@ -1,9 +1,9 @@
 package conf;
 
-import conf.subconf.DeployApp;
-import conf.subconf.DeployAppServer;
-import conf.subconf.DeployDB;
-import conf.subconf.DeployMailServer;
+import conf.subconf.DeployConfApp;
+import conf.subconf.DeployConfAppServer;
+import conf.subconf.DeployConfDB;
+import conf.subconf.DeployConfMailServer;
 import org.apache.log4j.Logger;
 import org.dom4j.Document;
 import org.dom4j.DocumentException;
@@ -17,13 +17,13 @@ import java.io.InputStream;
 /**
  * Created by lab on 2015/1/3.
  */
-public class DeployConf implements IDeploy{
-    private DeployDB deployDB;
-    private DeployMailServer deployMailServer;
-    private DeployAppServer deployAppServer;
-    private DeployApp deployApp;
+public class DeployConfConf implements IDeployConf {
+    private DeployConfDB deployDB;
+    private DeployConfMailServer deployMailServer;
+    private DeployConfAppServer deployAppServer;
+    private DeployConfApp deployApp;
 
-    private static Logger logger = Logger.getLogger(DeployConf.class);
+    private static Logger logger = Logger.getLogger(DeployConfConf.class);
 
     @Override
     public String toString() {
@@ -35,19 +35,19 @@ public class DeployConf implements IDeploy{
                 '}';
     }
 
-    public DeployDB getDeployDB() {
+    public DeployConfDB getDeployDB() {
         return deployDB;
     }
 
-    public DeployMailServer getDeployMailServer() {
+    public DeployConfMailServer getDeployMailServer() {
         return deployMailServer;
     }
 
-    public DeployAppServer getDeployAppServer() {
+    public DeployConfAppServer getDeployAppServer() {
         return deployAppServer;
     }
 
-    public DeployApp getDeployApp() {
+    public DeployConfApp getDeployApp() {
         return deployApp;
     }
 
@@ -84,19 +84,19 @@ public class DeployConf implements IDeploy{
     @Override
     public void initInstance(Node node) {
         Node deployDBNode = node.selectSingleNode("deploy-db");
-        deployDB = new DeployDB();
+        deployDB = new DeployConfDB();
         deployDB.initInstance(deployDBNode);
 
         Node deployMailServerNode = node.selectSingleNode("deploy-mail-server");
-        deployMailServer = new DeployMailServer();
+        deployMailServer = new DeployConfMailServer();
         deployMailServer.initInstance(deployMailServerNode);
 
         Node deployAppServerNode = node.selectSingleNode("deploy-app-server");
-        deployAppServer = new DeployAppServer();
+        deployAppServer = new DeployConfAppServer();
         deployAppServer.initInstance(deployAppServerNode);
 
         Node deployAppNode = node.selectSingleNode("deploy-app");
-        deployApp = new DeployApp();
+        deployApp = new DeployConfApp();
         deployApp.initInstance(deployAppNode);
     }
 }
