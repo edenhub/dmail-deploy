@@ -1,11 +1,11 @@
-package conf.subconf;
+package pri.adam.dmail.deploy.conf.subconf;
 
-import conf.IDeployConf;
 import org.apache.log4j.Logger;
 import org.dom4j.Document;
 import org.dom4j.DocumentException;
 import org.dom4j.Node;
 import org.dom4j.io.SAXReader;
+import pri.adam.dmail.deploy.conf.IDeployConf;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -88,7 +88,7 @@ public class DeployConfDBSQL implements IDeployConf {
                 '}';
     }
 
-    private class TablePair{
+    public class TablePair{
         private String tableName;
         private String tableSql;
 

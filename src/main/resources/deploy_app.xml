@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<deploy-app-server>
+    <!--src未使用-->
+    <app-server-src>./tomcat7</app-server-src>
+    <app-server-dest>c:\\OOP\\tomcat7\\</app-server-dest>
+</deploy-app-server>

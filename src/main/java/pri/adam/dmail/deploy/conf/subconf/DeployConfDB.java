@@ -1,13 +1,13 @@
-package conf.subconf;
+package pri.adam.dmail.deploy.conf.subconf;
 
 
-import conf.IDeployConf;
 import org.apache.log4j.Logger;
 import org.dom4j.Document;
 import org.dom4j.DocumentException;
 import org.dom4j.Node;
 import org.dom4j.io.SAXReader;
-import utils.Version;
+import pri.adam.dmail.deploy.conf.IDeployConf;
+import pri.adam.dmail.deploy.utils.Version;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -22,6 +22,8 @@ public class DeployConfDB implements IDeployConf {
     private String dbUrl;
     private String dbUser;
     private String dbPassword;
+    private DBType dbType;
+
     private static Logger logger = Logger.getLogger(DeployConfDB.class);
 
     public DeployConfDBSQL getDeployDBSQL() {
@@ -64,6 +66,14 @@ public class DeployConfDB implements IDeployConf {
         this.dbPassword = dbPassword;
     }
 
+    public DBType getDbType() {
+        return dbType;
+    }
+
+    public void setDbType(DBType dbType) {
+        this.dbType = dbType;
+    }
+
     @Override
     public String toString() {
         return "DeployDB{" +
@@ -103,6 +113,8 @@ public class DeployConfDB implements IDeployConf {
 
     @Override
     public void initInstance(Node node) {
+        Node dbType = node.selectSingleNode("type");
+        setDbType(DBType.newInstance(dbType.getText()));
         Node sqlFile = node.selectSingleNode("sql-file");
         String path = sqlFile.getText();
         InputStream in = null;
@@ -125,5 +137,32 @@ public class DeployConfDB implements IDeployConf {
 
         Node dbPassword = node.selectSingleNode("db-password");
         setDbPassword(dbPassword.getText());
+    }
+
+    public enum DBType {
+        MYSQL("mysql"),ORACLE("oracle");
+
+        DBType(String type){
+            this.type = type;
+        }
+
+        String type;
+
+        public String getType() {
+            return type;
+        }
+
+        public void setType(String type) {
+            this.type = type;
+        }
+
+        public static DBType newInstance(String dbType){
+            if (dbType.equals("mysql"))
+                return MYSQL;
+            else if (dbType.equals("oracle"))
+                return ORACLE;
+            else
+                throw new RuntimeException("不支持该种数据库");
+        }
     }
 }

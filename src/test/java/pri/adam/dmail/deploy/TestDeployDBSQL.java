@@ -1,9 +1,9 @@
-package conf;
+package pri.adam.dmail.deploy;
 
-import conf.subconf.DeployConfDBSQL;
 import org.junit.Before;
 import org.junit.Test;
-import utils.Version;
+import pri.adam.dmail.deploy.conf.subconf.DeployConfDBSQL;
+import pri.adam.dmail.deploy.utils.Version;
 
 import java.io.InputStream;
 

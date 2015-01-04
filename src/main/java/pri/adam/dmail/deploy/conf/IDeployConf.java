@@ -1,4 +1,4 @@
-package conf;
+package pri.adam.dmail.deploy.conf;
 
 import org.dom4j.Node;
 

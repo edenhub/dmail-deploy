@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<deploy-mail-server>
+    <!--src未使用-->
+    <mail-server-src>./james2</mail-server-src>
+    <mail-server-dest>c:\\OOP\\james2\\</mail-server-dest>
+</deploy-mail-server>

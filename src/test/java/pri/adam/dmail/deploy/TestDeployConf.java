@@ -1,7 +1,8 @@
-package conf;
+package pri.adam.dmail.deploy;
 
 import org.junit.Test;
-import utils.Version;
+import pri.adam.dmail.deploy.conf.DeployConf;
+import pri.adam.dmail.deploy.utils.Version;
 
 import java.io.InputStream;
 
@@ -12,7 +13,7 @@ public class TestDeployConf {
     @Test
     public void test01(){
         InputStream in = Version.class.getResourceAsStream("/deploy_all.xml");
-        DeployConfConf deployConf = new DeployConfConf();
+        DeployConf deployConf = new DeployConf();
         deployConf.initInstance(in);
 
         System.out.println(deployConf);

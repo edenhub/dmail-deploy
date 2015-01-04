@@ -10,10 +10,44 @@
     <packaging>jar</packaging>
 
     <build>
-        <finalName>dmail-deploy</finalName>
+        <finalName>yDeploy</finalName>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-shade-plugin</artifactId>
+                <version>2.3</version>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>shade</goal>
+                        </goals>
+                        <configuration>
+                            <transformers>
+                                <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+                                    <mainClass>pri.adam.dmail.deploy.cli.CLIViewer</mainClass>
+                                </transformer>
+                            </transformers>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
     </build>
 
     <dependencies>
+        <dependency>
+            <groupId>dmail</groupId>
+            <artifactId>dmail-utils</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>1.4</version>
+        </dependency>
+
         <dependency>
             <groupId>dom4j</groupId>
             <artifactId>dom4j</artifactId>
@@ -38,11 +72,18 @@
         </dependency>
 
         <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>5.1.31</version>
+        </dependency>
+
+        <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <version>4.10</version>
             <scope>test</scope>
         </dependency>
     </dependencies>
+
 
 </project>

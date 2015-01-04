@@ -1,12 +1,11 @@
-package conf.subconf;
+package pri.adam.dmail.deploy.conf.subconf;
 
-
-import conf.IDeployConf;
 import org.apache.log4j.Logger;
 import org.dom4j.Document;
 import org.dom4j.DocumentException;
 import org.dom4j.Node;
 import org.dom4j.io.SAXReader;
+import pri.adam.dmail.deploy.conf.IDeployConf;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -15,33 +14,33 @@ import java.io.InputStream;
 /**
  * Created by lab on 2015/1/3.
  */
-public class DeployConfApp implements IDeployConf {
-    private String appSrc;
-    private String appIndex;
+public class DeployConfAppServer implements IDeployConf {
+    private String appServerSrc;
+    private String appServerDest;
 
-    private static Logger logger = Logger.getLogger(DeployConfApp.class);
+    private Logger logger = Logger.getLogger(DeployConfAppServer.class);
 
-    public String getAppSrc() {
-        return appSrc;
+    public String getAppServerSrc() {
+        return appServerSrc;
     }
 
-    public void setAppSrc(String appSrc) {
-        this.appSrc = appSrc;
+    public void setAppServerSrc(String appServerSrc) {
+        this.appServerSrc = appServerSrc;
     }
 
-    public String getAppIndex() {
-        return appIndex;
+    public String getAppServerDest() {
+        return appServerDest;
     }
 
-    public void setAppIndex(String appIndex) {
-        this.appIndex = appIndex;
+    public void setAppServerDest(String appServerDest) {
+        this.appServerDest = appServerDest;
     }
 
     @Override
     public String toString() {
-        return "DeployApp{" +
-                "appSrc='" + appSrc + '\'' +
-                ", appIndex='" + appIndex + '\'' +
+        return "DeployAppServer{" +
+                "appServerSrc='" + appServerSrc + '\'' +
+                ", appServerDest='" + appServerDest + '\'' +
                 '}';
     }
 
@@ -67,15 +66,15 @@ public class DeployConfApp implements IDeployConf {
             e.printStackTrace();
         }
 
-        Node node = doc.selectSingleNode("deploy-app");
+        Node node = doc.selectSingleNode("deploy-app-server");
         initInstance(node);
     }
 
     @Override
     public void initInstance(Node node) {
-        Node appSrc = node.selectSingleNode("app-src");
-        setAppSrc(appSrc.getText());
-        Node appIndex = node.selectSingleNode("app-index");
-        setAppIndex(appIndex.getText());
+        Node appServerSrc = node.selectSingleNode("app-server-src");
+        setAppServerSrc(appServerSrc.getText());
+        Node appServerDest = node.selectSingleNode("app-server-dest");
+        setAppServerDest(appServerDest.getText());
     }
 }

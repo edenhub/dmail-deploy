@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <deploy>
     <deploy-db>
+        <type>mysql</type>
         <sql-file>./mysql.xml</sql-file>
         <db-name>mail</db-name>
         <!--jdbc:mysql://localhost/easyform?user=root&password=12345-->
@@ -9,13 +10,16 @@
         <db-password>12345</db-password>
     </deploy-db>
     <deploy-mail-server>
+        <!--src未使用-->
         <mail-server-src>./james2</mail-server-src>
-        <mail-server-dest>d:\\OOP\\mail-server\\</mail-server-dest>
+        <mail-server-dest>c:\\OOP\\james2\\</mail-server-dest>
     </deploy-mail-server>
     <deploy-app-server>
+        <!--src未使用-->
         <app-server-src>./tomcat7</app-server-src>
-        <app-server-dest>d:\\OOP\\app-server</app-server-dest>
+        <app-server-dest>c:\\OOP\\tomcat7\\</app-server-dest>
     </deploy-app-server>
+    <!--该节点未使用-->
     <deploy-app>
         <app-src>./ymail</app-src>
         <app-index>localhost:8080/ymail</app-index>

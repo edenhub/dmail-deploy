@@ -1,14 +1,14 @@
-package conf;
+package pri.adam.dmail.deploy.conf;
 
-import conf.subconf.DeployConfApp;
-import conf.subconf.DeployConfAppServer;
-import conf.subconf.DeployConfDB;
-import conf.subconf.DeployConfMailServer;
 import org.apache.log4j.Logger;
 import org.dom4j.Document;
 import org.dom4j.DocumentException;
 import org.dom4j.Node;
 import org.dom4j.io.SAXReader;
+import pri.adam.dmail.deploy.conf.subconf.DeployConfApp;
+import pri.adam.dmail.deploy.conf.subconf.DeployConfAppServer;
+import pri.adam.dmail.deploy.conf.subconf.DeployConfDB;
+import pri.adam.dmail.deploy.conf.subconf.DeployConfMailServer;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -17,13 +17,13 @@ import java.io.InputStream;
 /**
  * Created by lab on 2015/1/3.
  */
-public class DeployConfConf implements IDeployConf {
+public class DeployConf implements IDeployConf {
     private DeployConfDB deployDB;
     private DeployConfMailServer deployMailServer;
     private DeployConfAppServer deployAppServer;
     private DeployConfApp deployApp;
 
-    private static Logger logger = Logger.getLogger(DeployConfConf.class);
+    private static Logger logger = Logger.getLogger(DeployConf.class);
 
     @Override
     public String toString() {

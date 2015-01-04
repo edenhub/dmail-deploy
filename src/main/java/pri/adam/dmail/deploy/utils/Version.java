@@ -1,4 +1,4 @@
-package utils;
+package pri.adam.dmail.deploy.utils;
 
 /**
  * Created by lab on 2015/1/3.
