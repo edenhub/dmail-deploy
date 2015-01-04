@@ -25,5 +25,8 @@
         <module name="dmail-deploy" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="dmail-deploy" target="1.6" />
+    </bytecodeTargetLevel>
   </component>
 </project>

@@ -14,12 +14,24 @@ import java.io.InputStream;
 
 /**
  * Created by lab on 2015/1/3.
+ * 数据库配置信息对象
+ *
+ * @auth adam
+ * @sicne 1.0-SNAPSHOT
  */
 public class DeployConfApp implements IDeployConf {
     private String appSrc;
     private String appIndex;
 
     private static Logger logger = Logger.getLogger(DeployConfApp.class);
+
+    /*
+   *
+   *  =======================================================================================
+   *                                  Getter And Setter
+   *  =======================================================================================
+   *
+   */
 
     public String getAppSrc() {
         return appSrc;
@@ -37,6 +49,13 @@ public class DeployConfApp implements IDeployConf {
         this.appIndex = appIndex;
     }
 
+      /*
+     *
+     *  =======================================================================================
+     *                                  Getter And Setter
+     *  =======================================================================================
+     *
+     */
 
     @Override
     public String toString() {
@@ -46,17 +65,23 @@ public class DeployConfApp implements IDeployConf {
                 '}';
     }
 
+    /**
+     * @param path
+     */
     @Override
     public void initInstance(String path) {
         InputStream in = null;
         try {
             in = new FileInputStream(path);
         } catch (FileNotFoundException e) {
-            logger.error("无法读取配置文件，检查路径是否正确",e);
+            logger.error("无法读取配置文件，检查路径是否正确", e);
             e.printStackTrace();
         }
     }
 
+    /**
+     * @param inputStream
+     */
     @Override
     public void initInstance(InputStream inputStream) {
         SAXReader reader = new SAXReader();
@@ -64,7 +89,7 @@ public class DeployConfApp implements IDeployConf {
         try {
             doc = reader.read(inputStream);
         } catch (DocumentException e) {
-            logger.error("无法读取配置文件，检查路径是否正确",e);
+            logger.error("无法读取配置文件，检查路径是否正确", e);
             e.printStackTrace();
         }
 
@@ -72,6 +97,9 @@ public class DeployConfApp implements IDeployConf {
         initInstance(node);
     }
 
+    /**
+     * @param node
+     */
     @Override
     public void initInstance(Node node) {
         Node appSrc = node.selectSingleNode("app-src");

@@ -18,17 +18,26 @@ import java.util.Properties;
 
 /**
  * Created by lab on 2015/1/4.
+ * <p/>
+ * 默认的部署接口实现
+ *
+ * @auth adam
+ * @sicne 1.0-SNAPSHOT
  */
-public class DefDeploy implements IDeploy,IDeployAll {
+public class DefDeploy implements IDeploy, IDeployAll {
     private static Logger logger = Logger.getLogger(DefDeploy.class);
 
+    /**
+     * @param deployConfDB 数据库配置信息文件对象
+     * @return
+     */
     @Override
     public boolean deployDB(final DeployConfDB deployConfDB) {
         Properties dbPros = new Properties();
-        dbPros.setProperty("db.driverName",selectDriverName(deployConfDB.getDbType()));
-        dbPros.setProperty("db.Url",deployConfDB.getDbUrl());
-        dbPros.setProperty("db.username",deployConfDB.getDbUser());
-        dbPros.setProperty("db.password",deployConfDB.getDbPassword());
+        dbPros.setProperty("db.driverName", selectDriverName(deployConfDB.getDbType()));
+        dbPros.setProperty("db.Url", deployConfDB.getDbUrl());
+        dbPros.setProperty("db.username", deployConfDB.getDbUser());
+        dbPros.setProperty("db.password", deployConfDB.getDbPassword());
 
         DBManager dbManager = new DBManager();
         dbManager.conn(dbPros);
@@ -42,7 +51,7 @@ public class DefDeploy implements IDeploy,IDeployAll {
                 DeployConfDBSQL deployConfDBSQL = deployConfDB.getDeployDBSQL();
                 List<DeployConfDBSQL.TablePair> tablePairs = deployConfDBSQL.getTablePairs();
 
-                for (DeployConfDBSQL.TablePair tp : tablePairs){
+                for (DeployConfDBSQL.TablePair tp : tablePairs) {
                     stm.addBatch(tp.getTableSql());
                 }
 
@@ -56,7 +65,7 @@ public class DefDeploy implements IDeploy,IDeployAll {
 
         boolean createResult = resultObject != null ? true : false;
 
-        if (!createResult){
+        if (!createResult) {
             logger.error("检查配置信息是否有错");
         }
 
@@ -68,13 +77,17 @@ public class DefDeploy implements IDeploy,IDeployAll {
         return createResult;
     }
 
+    /**
+     * @param deployConfMailServer 邮件服务器配置信息文件对象
+     * @return
+     */
     @Override
     public boolean deployMailServer(final DeployConfMailServer deployConfMailServer) {
         File serverPath = new File(deployConfMailServer.getMailServerDest());
-        if (!serverPath.exists()){
-            File serverSrc = new File(getDefaultPath()+"/james2");
+        if (!serverPath.exists()) {
+            File serverSrc = new File(getDefaultPath() + "/james2");
             try {
-                FileUtils.copyDirectory(serverSrc,serverPath);
+                FileUtils.copyDirectory(serverSrc, serverPath);
             } catch (IOException e) {
                 e.printStackTrace();
                 return false;
@@ -84,13 +97,17 @@ public class DefDeploy implements IDeploy,IDeployAll {
         return true;
     }
 
+    /**
+     * @param deployConfAppServer 服务器配置信息文件对象
+     * @return
+     */
     @Override
     public boolean deployAppServer(final DeployConfAppServer deployConfAppServer) {
         File serverPath = new File(deployConfAppServer.getAppServerDest());
-        if (!serverPath.exists()){
-            File serverSrc = new File(getDefaultPath()+"/tomcat7");
+        if (!serverPath.exists()) {
+            File serverSrc = new File(getDefaultPath() + "/tomcat7");
             try {
-                FileUtils.copyDirectory(serverSrc,serverPath);
+                FileUtils.copyDirectory(serverSrc, serverPath);
             } catch (IOException e) {
                 e.printStackTrace();
                 return false;
@@ -100,11 +117,20 @@ public class DefDeploy implements IDeploy,IDeployAll {
         return true;
     }
 
+    /**
+     * @param deployConfApp
+     * @return
+     * @throws MethodNotSupportedException
+     */
     @Override
     public boolean deployApp(final DeployConfApp deployConfApp) throws MethodNotSupportedException {
         throw new MethodNotSupportedException("未实现");
     }
 
+    /**
+     * @param deployConf 总配置文件信息对象
+     * @return
+     */
     @Override
     public boolean deployAll(final DeployConf deployConf) {
         if (deployDB(deployConf.getDeployDB()) &&
@@ -115,8 +141,14 @@ public class DefDeploy implements IDeploy,IDeployAll {
         return false;
     }
 
-    private String selectDriverName(final DeployConfDB.DBType dbType){
-        switch(dbType){
+    /**
+     * 选择所指定数据库类型的驱动类
+     *
+     * @param dbType
+     * @return
+     */
+    private String selectDriverName(final DeployConfDB.DBType dbType) {
+        switch (dbType) {
             case MYSQL:
                 return "com.mysql.jdbc.Driver";
             case ORACLE:
@@ -126,7 +158,12 @@ public class DefDeploy implements IDeploy,IDeployAll {
         throw new RuntimeException("不支持该种数据库");
     }
 
-    public String getDefaultPath(){
+    /**
+     * 获得当前jar所在文件夹
+     *
+     * @return
+     */
+    public String getDefaultPath() {
         String jarPath = DefDeploy.class.getProtectionDomain().getCodeSource().getLocation().getPath();
         int startIndex = jarPath.indexOf("/");
         int endIndex = jarPath.lastIndexOf("/");

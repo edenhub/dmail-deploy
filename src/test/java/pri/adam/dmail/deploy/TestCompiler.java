@@ -27,7 +27,7 @@ public class TestCompiler {
 //    }
 
     @Test
-    public void test03(){
+    public void test03() {
         DeployConf deployConf = new DeployConf();
         deployConf.initInstance(Version.class.getResourceAsStream("/deploy_all.xml"));
         DefDeploy defDeploy = new DefDeploy();
@@ -35,7 +35,7 @@ public class TestCompiler {
     }
 
     @Test
-    public void test04(){
+    public void test04() {
         DeployConf deployConf = new DeployConf();
         deployConf.initInstance(Version.class.getResourceAsStream("/deploy_all.xml"));
         DefDeploy defDeploy = new DefDeploy();

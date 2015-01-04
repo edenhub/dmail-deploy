@@ -11,7 +11,7 @@ import java.io.InputStream;
  */
 public class TestDeployConf {
     @Test
-    public void test01(){
+    public void test01() {
         InputStream in = Version.class.getResourceAsStream("/deploy_all.xml");
         DeployConf deployConf = new DeployConf();
         deployConf.initInstance(in);

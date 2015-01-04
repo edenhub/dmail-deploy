@@ -16,6 +16,10 @@ import java.io.InputStream;
 
 /**
  * Created by lab on 2015/1/3.
+ * 总配置信息对象实现类
+ *
+ * @auth adam
+ * @sicne 1.0-SNAPSHOT
  */
 public class DeployConf implements IDeployConf {
     private DeployConfDB deployDB;
@@ -34,6 +38,14 @@ public class DeployConf implements IDeployConf {
                 ", deployApp=" + deployApp +
                 '}';
     }
+
+    /*
+   *
+   *  =======================================================================================
+   *                                  Getter And Setter
+   *  =======================================================================================
+   *
+   */
 
     public DeployConfDB getDeployDB() {
         return deployDB;
@@ -55,17 +67,31 @@ public class DeployConf implements IDeployConf {
         return logger;
     }
 
+      /*
+     *
+     *  =======================================================================================
+     *                                  Getter And Setter
+     *  =======================================================================================
+     *
+     */
+
+    /**
+     * @param path
+     */
     @Override
     public void initInstance(String path) {
         InputStream in = null;
         try {
             in = new FileInputStream(path);
         } catch (FileNotFoundException e) {
-            logger.error("无法读取配置文件，检查路径是否正确",e);
+            logger.error("无法读取配置文件，检查路径是否正确", e);
             e.printStackTrace();
         }
     }
 
+    /**
+     * @param inputStream
+     */
     @Override
     public void initInstance(InputStream inputStream) {
         SAXReader reader = new SAXReader();
@@ -73,7 +99,7 @@ public class DeployConf implements IDeployConf {
         try {
             doc = reader.read(inputStream);
         } catch (DocumentException e) {
-            logger.error("无法读取配置文件，检查路径是否正确",e);
+            logger.error("无法读取配置文件，检查路径是否正确", e);
             e.printStackTrace();
         }
 
@@ -81,6 +107,9 @@ public class DeployConf implements IDeployConf {
         initInstance(node);
     }
 
+    /**
+     * @param node
+     */
     @Override
     public void initInstance(Node node) {
         Node deployDBNode = node.selectSingleNode("deploy-db");

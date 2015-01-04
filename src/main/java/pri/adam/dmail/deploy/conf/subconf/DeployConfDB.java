@@ -15,6 +15,11 @@ import java.io.InputStream;
 
 /**
  * Created by lab on 2015/1/3.
+ * <p/>
+ * 数据库配置信息对象
+ *
+ * @auth adam
+ * @sicne 1.0-SNAPSHOT
  */
 public class DeployConfDB implements IDeployConf {
     private DeployConfDBSQL deployDBSQL;
@@ -25,6 +30,14 @@ public class DeployConfDB implements IDeployConf {
     private DBType dbType;
 
     private static Logger logger = Logger.getLogger(DeployConfDB.class);
+
+    /*
+   *
+   *  =======================================================================================
+   *                                  Getter And Setter
+   *  =======================================================================================
+   *
+   */
 
     public DeployConfDBSQL getDeployDBSQL() {
         return deployDBSQL;
@@ -74,6 +87,14 @@ public class DeployConfDB implements IDeployConf {
         this.dbType = dbType;
     }
 
+    /*
+   *
+   *  =======================================================================================
+   *                                  Getter And Setter
+   *  =======================================================================================
+   *
+   */
+
     @Override
     public String toString() {
         return "DeployDB{" +
@@ -85,17 +106,23 @@ public class DeployConfDB implements IDeployConf {
                 '}';
     }
 
+    /**
+     * @param path
+     */
     @Override
     public void initInstance(String path) {
         InputStream in = null;
         try {
             in = new FileInputStream(path);
         } catch (FileNotFoundException e) {
-            logger.error("无法读取配置文件，检查路径是否正确",e);
+            logger.error("无法读取配置文件，检查路径是否正确", e);
             e.printStackTrace();
         }
     }
 
+    /**
+     * @param inputStream
+     */
     @Override
     public void initInstance(InputStream inputStream) {
         SAXReader reader = new SAXReader();
@@ -103,7 +130,7 @@ public class DeployConfDB implements IDeployConf {
         try {
             doc = reader.read(inputStream);
         } catch (DocumentException e) {
-            logger.error("无法读取配置文件，检查路径是否正确",e);
+            logger.error("无法读取配置文件，检查路径是否正确", e);
             e.printStackTrace();
         }
 
@@ -111,6 +138,9 @@ public class DeployConfDB implements IDeployConf {
         initInstance(node);
     }
 
+    /**
+     * @param node
+     */
     @Override
     public void initInstance(Node node) {
         Node dbType = node.selectSingleNode("type");
@@ -119,10 +149,10 @@ public class DeployConfDB implements IDeployConf {
         String path = sqlFile.getText();
         InputStream in = null;
         deployDBSQL = new DeployConfDBSQL();
-        if (path.startsWith("./")){
+        if (path.startsWith("./")) {
             in = Version.class.getResourceAsStream(path.substring(path.indexOf("/")));
             deployDBSQL.initInstance(in);
-        }else{
+        } else {
             deployDBSQL.initInstance(path);
         }
 
@@ -139,15 +169,25 @@ public class DeployConfDB implements IDeployConf {
         setDbPassword(dbPassword.getText());
     }
 
+    /**
+     * 数据库类型对象
+     */
     public enum DBType {
-        MYSQL("mysql"),ORACLE("oracle");
+        MYSQL("mysql"), ORACLE("oracle");
 
-        DBType(String type){
+        DBType(String type) {
             this.type = type;
         }
 
         String type;
 
+        /*
+   *
+   *  =======================================================================================
+   *                                  Getter And Setter
+   *  =======================================================================================
+   *
+   */
         public String getType() {
             return type;
         }
@@ -156,7 +196,21 @@ public class DeployConfDB implements IDeployConf {
             this.type = type;
         }
 
-        public static DBType newInstance(String dbType){
+        /*
+   *
+   *  =======================================================================================
+   *                                  Getter And Setter
+   *  =======================================================================================
+   *
+   */
+
+        /**
+         * 根据数据库类型生成相应的对象
+         *
+         * @param dbType
+         * @return
+         */
+        public static DBType newInstance(String dbType) {
             if (dbType.equals("mysql"))
                 return MYSQL;
             else if (dbType.equals("oracle"))

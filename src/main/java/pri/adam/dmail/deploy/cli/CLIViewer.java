@@ -10,15 +10,29 @@ import pri.adam.dmail.deploy.conf.subconf.DeployConfMailServer;
 
 /**
  * Created by lab on 2015/1/3.
+ * 命令行窗口
+ *
+ * @auth adam
+ * @sicne 1.0-SNAPSHOT
  */
 public class CLIViewer {
     private DefDeploy deployer = new DefDeploy();
     private static Logger logger = Logger.getLogger(CLIViewer.class);
 
+    /**
+     * 主方法
+     *
+     * @param args
+     */
     public static void main(String[] args) {
         new CLIViewer().buildOptions(args);
     }
 
+    /**
+     * 命令行信息
+     *
+     * @param args
+     */
     public void buildOptions(String[] args) {
         Options options = new Options();
         options.addOption("a", "deploy-all", false, "直接一键部署全部");
@@ -54,7 +68,7 @@ public class CLIViewer {
                 logger.info("部署完毕");
             }
             return;
-        }else if (cli.hasOption("d")) {
+        } else if (cli.hasOption("d")) {
 //            String value = cli.getOptionValue("d");
             DeployConfDB deployConfDB = new DeployConfDB();
 //            if (value.equals(".")){
@@ -70,7 +84,7 @@ public class CLIViewer {
             } else {
                 logger.info("部署成功");
             }
-        }else if (cli.hasOption("m")) {
+        } else if (cli.hasOption("m")) {
 //            String value = cli.getOptionValue("m");
             DeployConfMailServer deployConfMailServer = new DeployConfMailServer();
 //            if (value.equals(".")) {
@@ -84,7 +98,7 @@ public class CLIViewer {
             } else {
                 logger.info("部署成功");
             }
-        }else if (cli.hasOption("c")) {
+        } else if (cli.hasOption("c")) {
 //            String value = cli.getOptionValue("c");
             DeployConfAppServer deployConfAppServer = new DeployConfAppServer();
 //            if (value.equals(".")){
@@ -99,10 +113,10 @@ public class CLIViewer {
             } else {
                 logger.info("部署成功");
             }
-        }else if (cli.hasOption("h")) {
+        } else if (cli.hasOption("h")) {
             helpFormatter.printHelp(formatstr, options);
-        }else{
-            helpFormatter.printHelp(formatstr,options);
+        } else {
+            helpFormatter.printHelp(formatstr, options);
         }
     }
 }

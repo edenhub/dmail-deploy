@@ -9,7 +9,7 @@
             `pwdHash` varchar(255) DEFAULT NULL,
             PRIMARY KEY (`id`,`username`),
             KEY `id` (`id`)
-            ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=0 ;
+            ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=0 ;
         </table-sql>
     </table>
     <table>
@@ -23,7 +23,7 @@
             `tofriend` int(11) DEFAULT NULL,
             PRIMARY KEY (`id`,`mail`),
             KEY `fk_tofriend` (`tofriend`)
-            ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=0 ;
+            ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=0 ;
         </table-sql>
     </table>
     <table>
@@ -37,7 +37,7 @@
             `f_level` tinyint(4) NOT NULL,
             `result` tinyint(4) DEFAULT NULL,
             PRIMARY KEY (`id`)
-            ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=0 ;
+            ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=0 ;
         </table-sql>
     </table>
 </db-sql>

@@ -13,12 +13,26 @@ import java.io.InputStream;
 
 /**
  * Created by lab on 2015/1/3.
+ * <p/>
+ * 邮件服务器配置信息对象
+ *
+ * @auth adam
+ * @sicne 1.0-SNAPSHOT
  */
 public class DeployConfMailServer implements IDeployConf {
     private String mailServerSrc;
     private String mailServerDest;
 
     private static Logger logger = Logger.getLogger(DeployConfMailServer.class);
+
+    /*
+   *
+   *  =======================================================================================
+   *                                  Getter And Setter
+   *  =======================================================================================
+   *
+   */
+
     public String getMailServerSrc() {
         return mailServerSrc;
     }
@@ -35,6 +49,14 @@ public class DeployConfMailServer implements IDeployConf {
         this.mailServerDest = mailServerDest;
     }
 
+    /*
+   *
+   *  =======================================================================================
+   *                                  Getter And Setter
+   *  =======================================================================================
+   *
+   */
+
     @Override
     public String toString() {
         return "DeployMailServer{" +
@@ -43,17 +65,23 @@ public class DeployConfMailServer implements IDeployConf {
                 '}';
     }
 
+    /**
+     * @param path
+     */
     @Override
     public void initInstance(String path) {
         InputStream in = null;
         try {
             in = new FileInputStream(path);
         } catch (FileNotFoundException e) {
-            logger.error("无法读取配置文件，检查路径是否正确",e);
+            logger.error("无法读取配置文件，检查路径是否正确", e);
             e.printStackTrace();
         }
     }
 
+    /**
+     * @param inputStream
+     */
     @Override
     public void initInstance(InputStream inputStream) {
         SAXReader reader = new SAXReader();
@@ -61,7 +89,7 @@ public class DeployConfMailServer implements IDeployConf {
         try {
             doc = reader.read(inputStream);
         } catch (DocumentException e) {
-            logger.error("无法读取配置文件，检查路径是否正确",e);
+            logger.error("无法读取配置文件，检查路径是否正确", e);
             e.printStackTrace();
         }
 
@@ -69,6 +97,9 @@ public class DeployConfMailServer implements IDeployConf {
         initInstance(node);
     }
 
+    /**
+     * @param node
+     */
     @Override
     public void initInstance(Node node) {
         Node mailServerSrc = node.selectSingleNode("mail-server-src");

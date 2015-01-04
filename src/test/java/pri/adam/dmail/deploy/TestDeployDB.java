@@ -14,7 +14,7 @@ public class TestDeployDB {
     private InputStream in;
 
     @Before
-    public void before(){
+    public void before() {
         in = Version.class.getResourceAsStream("/deploy-db.xml");
     }
 
